@@ -23,7 +23,7 @@
 
     // 注册事件的封装
     Init.prototype.on=function(key,hanshu){
-        this.each((i,e)=>{
+        this.each(function(i,e){
             e.addEventListener(key,hanshu);
         })
         return this;
@@ -32,15 +32,46 @@
     //css样式修改的封装
     Init.prototype.css=function(key,zhi){
         if(zhi==undefined){
-            let cs=getComputedStyle(this[0]);
+            let cs=window.getComputedStyle(this[0]);
             return cs[key];
         }else{
-            this.each((i,e)=>{
+            this.each(function(i,e){
                 e.style[key]=zhi;
             })
             return this;
         }
     }
+
+//     jq对象.addClass();
+//     jq对象.removeClass();
+//     jq对象.toggleClass();
+//   - 修改属性
+//     jq对象.attr()
+//     jq对象.prop()
+
+//封装添加类名
+Init.prototype.addClass=function(key){
+    this.each(function(i,e){
+        e.classList.add(key);
+    })
+    return this;
+}
+
+// 删除类名
+Init.prototype.removeClass=function(key){
+    this.each(function(i,e){
+        e.classList.remove(key);
+    })
+    return this;
+}
+
+// 切换类名
+Init.prototype.toggleClass=function(key){
+    this.each(function(i,e){
+        e.classList.toggle(key);
+    })
+    return this;
+}
 
     window.$ = window.jQuery = jQuery;
 })()
