@@ -13,6 +13,13 @@
         this.length=elements.length;
     };
 
+    //each的封装
+    Init.prototype.each=function(hanshu){
+        for(let i=0;i<=this.length;i++){
+            hanshu(i,this[i]);
+        }
+        return this;
+    }
 
     window.$ = window.jQuery = jQuery;
 })()
