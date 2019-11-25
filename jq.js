@@ -29,7 +29,18 @@
         return this;
     };
 
-    
+    //css样式修改的封装
+    Init.prototype.css=function(key,zhi){
+        if(zhi==undefined){
+            let cs=getComputedStyle(this[0]);
+            return cs[key];
+        }else{
+            this.each((i,e)=>{
+                e.style[key]=zhi;
+            })
+            return this;
+        }
+    }
 
     window.$ = window.jQuery = jQuery;
 })()
