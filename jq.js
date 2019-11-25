@@ -21,5 +21,15 @@
         return this;
     }
 
+    // 注册事件的封装
+    Init.prototype.on=function(key,hanshu){
+        this.each((i,e)=>{
+            e.addEventListener(key,hanshu);
+        })
+        return this;
+    };
+
+    
+
     window.$ = window.jQuery = jQuery;
 })()
