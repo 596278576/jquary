@@ -3,6 +3,7 @@
   function jQuery(selector) {
     return new Init(selector);
   }
+  
   function Init(selector) {
     let elements = document.querySelectorAll(selector);
     //遍历
@@ -30,24 +31,49 @@
   };
 
   //css样式修改的封装
-  Init.prototype.css = function(key, zhi) {
-    if (zhi == undefined) {
-      let cs = window.getComputedStyle(this[0]);
-      return cs[key];
-    } else {
-      this.each(function(i, e) {
-        e.style[key] = zhi;
-      });
-      return this;
-    }
-  };
+  // Init.prototype.css = function(key, zhi) {
+  //   if (zhi == undefined) {
+  //     let cs = window.getComputedStyle(this[0]);
+  //     return cs[key];
+  //   } else {
+  //     this.each(function(i, e) {
+  //       e.style[key] = zhi;
+  //     });
+  //     return this;
+  //   }
+  // };        css: function (name, value) {
+  Init.prototype.css = function(name, zhi) {
+    if (arguments.length == 2) {  //如果实参为2个参数
 
-  //     jq对象.addClass();
-  //     jq对象.removeClass();
-  //     jq对象.toggleClass();
-  //   - 修改属性
-  //     jq对象.attr()
-  //     jq对象.prop()
+      for (var i = 0; i < this.length; i++) {
+
+          this[i].style[name] = value;
+
+      }
+  } else if(arguments.length == 1) { //如果实参为1个参数
+
+      if(typeof arguments[0] == 'string') { 
+
+//如果为string类型,则应该是获取元素样式---->window.getComputedStyle(obj)[name] -->获取元素的样式属性
+
+          return window.getComputedStyle(this[0])[name];
+
+      } else { //对象的情况
+
+          for(var key in name) {
+
+              for (var i = 0; i < this.length; i++) {
+
+                  this[i].style[key] = name[key];
+
+              }
+          }
+      }
+  }
+  return this;
+}
+
+
 
   //封装添加类名
   Init.prototype.addClass = function(key) {
